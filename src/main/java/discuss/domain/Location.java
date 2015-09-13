@@ -61,7 +61,7 @@ public class Location implements Serializable {
             return new Location (this);
         }
     }
-    public Long getId‭() {
+    public Long getId() {
         return id‭;
     }
     public String getLocationName‭‭() {

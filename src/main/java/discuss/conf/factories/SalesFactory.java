@@ -10,7 +10,7 @@ import java.util.List;
  * Created by student on 2015/09/13.
  */
 public class SalesFactory {
-    public static Sales create(String salesDate,Long price, List<Bucket> buckets, List<Customer> customers){
+    public static Sales create(String salesDate,Double price, List<Bucket> buckets, List<Customer> customers){
         Sales sales= new Sales.Builder(salesDate)
                 .price(price)
                 .buckets(buckets)

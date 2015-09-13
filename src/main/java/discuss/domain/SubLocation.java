@@ -68,7 +68,7 @@ public class SubLocation implements Serializable {
         return subLocationName;
     }
 
-    public List<Location> getSubLocation() {
+    public List<Location> getLocation() {
         return locations;
     }
 }

@@ -68,7 +68,7 @@ public class Super implements Serializable {
         return superState;
     }
 
-    public List<Hive> getLocation() {
+    public List<Hive> getHives() {
         return hives;
     }
 }

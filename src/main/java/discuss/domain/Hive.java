@@ -64,7 +64,7 @@ public class Hive implements Serializable {
     public String getHiveState() {
         return hiveState;
     }
-        public List<SubLocation> getLocation() {
+        public List<SubLocation> getSubLocation() {
             return subLocations;
         }
 

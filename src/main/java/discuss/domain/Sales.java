@@ -13,7 +13,7 @@ public class Sales implements Serializable {
     private Long id;
 
     private String SalesDate;
-    private long price;
+    private Double price;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
@@ -36,7 +36,7 @@ public class Sales implements Serializable {
     public static class Builder {
         private Long id;
         private String SalesDate;
-        private Long price;
+        private Double price;
         private List<Customer> customers;
         private List<Bucket> buckets;
 
@@ -50,7 +50,7 @@ public class Sales implements Serializable {
             return this;
         }
 
-        public Builder price(Long value) {
+        public Builder price(Double value) {
             this.price = value;
             return this;
         }
@@ -88,7 +88,7 @@ public class Sales implements Serializable {
         return SalesDate;
     }
 
-    public Long getPrice() {
+    public Double getPrice() {
         return price;
     }
 

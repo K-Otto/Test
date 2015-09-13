@@ -20,6 +20,9 @@ public class Beekeeper implements Serializable {
     private Beekeeper() {
     }
 
+    public Long getId() {
+        return id;
+    }
     public String getFirstName() {
         return firstName;
     }
