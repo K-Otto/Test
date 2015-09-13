@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - comments@localhost" uuid="0733c5a9-1da1-4ca5-8b71-30ff58ceda43">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>comments.*</schema-pattern>
+      <default-schemas>comments.*</default-schemas>
+    </data-source>
+  </component>
+</project>
