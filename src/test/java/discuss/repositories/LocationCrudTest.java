@@ -1,6 +1,7 @@
 package discuss.repositories;
 import discuss.App;
 
+import discuss.conf.factories.BeekeeperFactory;
 import discuss.conf.factories.LocationFactory;
 import discuss.domain.Beekeeper;
 import discuss.domain.Location;
@@ -32,9 +33,9 @@ public class LocationCrudTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void create() throws Exception {
-        List<Beekeeper> jobs = new ArrayList<Beekeeper>();
+        Beekeeper beekeepers = BeekeeperFactory.create("karl", "otto", "karl1256@yahoo.com");
 
-        Location role = LocationFactory.create("date", jobs);
+        Location role = LocationFactory.create("date", beekeepers);
         repository.save(role);
         id=role.getId();
         Assert.assertNotNull(role);
@@ -49,19 +50,19 @@ public class LocationCrudTest extends AbstractTestNGSpringContextTests {
 
     @Test(dependsOnMethods = "read")
     public void update() throws Exception {
-        List<Beekeeper> jobs = new ArrayList<Beekeeper>();
+        Beekeeper beekeepers = BeekeeperFactory.create("karl", "otto", "karl1256@yahoo.com");
         Location role = repository.findOne(id);
         Location newrole = new Location
                 .Builder‭(role.getLocationName‭‭())
                 .copy(role)
-                .beekeepers(jobs)
+                .beekeepers(beekeepers)
                 .build();
         // SAVE UPDATED ROLE
         repository.save(newrole);
 
         // GET THE SAVED ROLE
         Location savedRole = repository.findOne(id);
-        Assert.assertEquals(savedRole.getBeekeepers(),jobs);
+        Assert.assertEquals(savedRole.getBeekeepers(),beekeepers);
     }
 
     @Test(dependsOnMethods = "update")

@@ -2,6 +2,8 @@ package discuss.domain;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -10,7 +12,8 @@ import javax.persistence.Id;
 @Entity
 public class Beekeeper implements Serializable {
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long beeID;
 
     private String firstName;
     private String lastName;
@@ -21,7 +24,7 @@ public class Beekeeper implements Serializable {
     }
 
     public Long getId() {
-        return id;
+        return beeID;
     }
     public String getFirstName() {
         return firstName;
@@ -36,6 +39,7 @@ public class Beekeeper implements Serializable {
     }
 
     public Beekeeper(Builder builder){
+        beeID=builder.beeID;
         firstName=builder.firstName;
         lastName=builder.lastName;
         email=builder.email;
@@ -45,7 +49,7 @@ public class Beekeeper implements Serializable {
         private String firstName;
         private String lastName;
         private String email;
-
+        private long beeID;
         public Builder(String lastName) {
             this.lastName = lastName;
         }
@@ -61,6 +65,7 @@ public class Beekeeper implements Serializable {
 
         }
         public Builder copy(Beekeeper value){
+            this.beeID = value.beeID;
             this.lastName =value.lastName ;
             this.firstName=value.firstName;
             this.email=value.email;

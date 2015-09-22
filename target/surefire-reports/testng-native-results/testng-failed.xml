@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite verbose="0" name="Failed suite [Command line suite]">
+  <test name="Command line test(failed)">
+    <classes>
+      <class name="discuss.repositories.HiveCrudTest">
+        <methods>
+          <include name="update"/>
+          <include name="springTestContextAfterTestClass"/>
+          <include name="delete"/>
+          <include name="read"/>
+          <include name="springTestContextAfterTestMethod"/>
+          <include name="create"/>
+        </methods>
+      </class> <!-- discuss.repositories.HiveCrudTest -->
+      <class name="discuss.repositories.CustomerCrudTest">
+        <methods>
+          <include name="delete"/>
+          <include name="springTestContextAfterTestClass"/>
+          <include name="read"/>
+          <include name="springTestContextAfterTestMethod"/>
+          <include name="update"/>
+          <include name="create"/>
+        </methods>
+      </class> <!-- discuss.repositories.CustomerCrudTest -->
+      <class name="discuss.repositories.HarvestCrudTest">
+        <methods>
+          <include name="springTestContextAfterTestClass"/>
+          <include name="read"/>
+          <include name="create"/>
+          <include name="springTestContextAfterTestMethod"/>
+          <include name="delete"/>
+          <include name="update"/>
+        </methods>
+      </class> <!-- discuss.repositories.HarvestCrudTest -->
+      <class name="discuss.repositories.SubLocationCrudTest">
+        <methods>
+          <include name="read"/>
+          <include name="springTestContextAfterTestClass"/>
+          <include name="delete"/>
+          <include name="create"/>
+          <include name="update"/>
+          <include name="springTestContextAfterTestMethod"/>
+        </methods>
+      </class> <!-- discuss.repositories.SubLocationCrudTest -->
+      <class name="discuss.repositories.BucketCrudTest">
+        <methods>
+          <include name="springTestContextAfterTestClass"/>
+          <include name="update"/>
+          <include name="create"/>
+          <include name="springTestContextAfterTestMethod"/>
+          <include name="delete"/>
+          <include name="read"/>
+        </methods>
+      </class> <!-- discuss.repositories.BucketCrudTest -->
+      <class name="discuss.repositories.BeekeeperCrudTest">
+        <methods>
+          <include name="create"/>
+          <include name="springTestContextAfterTestClass"/>
+          <include name="springTestContextBeforeTestClass"/>
+          <include name="springTestContextPrepareTestInstance"/>
+          <include name="springTestContextAfterTestMethod"/>
+        </methods>
+      </class> <!-- discuss.repositories.BeekeeperCrudTest -->
+      <class name="discuss.repositories.SuperCrudTest">
+        <methods>
+          <include name="springTestContextAfterTestClass"/>
+          <include name="springTestContextAfterTestMethod"/>
+          <include name="delete"/>
+          <include name="create"/>
+          <include name="update"/>
+          <include name="read"/>
+        </methods>
+      </class> <!-- discuss.repositories.SuperCrudTest -->
+      <class name="discuss.repositories.SalesCrudTest">
+        <methods>
+          <include name="springTestContextAfterTestClass"/>
+          <include name="create"/>
+          <include name="delete"/>
+          <include name="springTestContextAfterTestMethod"/>
+          <include name="read"/>
+          <include name="update"/>
+        </methods>
+      </class> <!-- discuss.repositories.SalesCrudTest -->
+      <class name="discuss.repositories.LocationCrudTest">
+        <methods>
+          <include name="delete"/>
+          <include name="update"/>
+          <include name="springTestContextAfterTestClass"/>
+          <include name="read"/>
+          <include name="springTestContextAfterTestMethod"/>
+          <include name="create"/>
+        </methods>
+      </class> <!-- discuss.repositories.LocationCrudTest -->
+    </classes>
+  </test> <!-- Command line test(failed) -->
+</suite> <!-- Failed suite [Command line suite] -->

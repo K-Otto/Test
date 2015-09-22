@@ -16,7 +16,7 @@ public class SalesFactoryTest {
     public void testCreate() throws Exception {
         List<Customer> jobs = new ArrayList<Customer>();
         List<Bucket> buc = new ArrayList<Bucket>();
-        Sales aa = SalesFactory.create("", 22.22, buc, jobs);
+        Sales aa = SalesFactory.create("Olives", 22.22, buc, jobs);
         Assert.assertEquals(aa.getSalesDate(), "Olives");
     }
 

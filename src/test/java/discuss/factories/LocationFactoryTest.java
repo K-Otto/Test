@@ -1,16 +1,13 @@
 package discuss.factories;
 
-import discuss.conf.factories.UserFactory;
-import discuss.domain.Reputation;
-import discuss.domain.User;
+import discuss.conf.factories.BeekeeperFactory;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import discuss.conf.factories.LocationFactory;
 import discuss.domain.Beekeeper;
 import discuss.domain.Location;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by student on 2015/09/13.
@@ -18,14 +15,14 @@ import java.util.List;
 public class LocationFactoryTest {
     @Test
     public void testCreate() throws Exception {
-        List<Beekeeper> beekeepers = new ArrayList<Beekeeper>();
+        Beekeeper beekeepers = BeekeeperFactory.create("karl", "otto", "karl1256@yahoo.com");
         Location location = LocationFactory.create("Darling", beekeepers);
         Assert.assertEquals(location.getLocationName‭‭(), "Darling");
     }
 
     @Test
     public void testUpdate() throws Exception {
-        List<Beekeeper> beekeepers = new ArrayList<Beekeeper>();
+        Beekeeper beekeepers = BeekeeperFactory.create("karl", "otto", "karl1256@yahoo.com");
 
 
         Location location = LocationFactory.create("Cape", beekeepers);

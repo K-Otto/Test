@@ -10,13 +10,13 @@ import javax.persistence.*;
 @Entity
 public class Location implements Serializable {
     @Id
-    private Long id‭;
+    private Long LocIDd‭;
 
     private String locationName‭;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private List<Beekeeper> beekeepers;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "beeID")
+    Beekeeper beekeepers;
 
 
     private Location() {
@@ -28,13 +28,13 @@ public class Location implements Serializable {
     public Location (Builder‭ builder)
     {
         locationName‭=builder.locationName‭;
-        id‭=builder.id‭;
+        LocIDd‭=builder.id‭;
     }
 
     public static class Builder‭{
         private Long id‭;
         private String locationName‭;
-        private List<Beekeeper> beekeepers;
+        private Beekeeper beekeepers;
 
 
         public Builder‭(String locationName‭) {
@@ -46,7 +46,7 @@ public class Location implements Serializable {
             return this;
         }
 
-        public Builder‭ beekeepers(List<Beekeeper> value){
+        public Builder‭ beekeepers(Beekeeper value){
             this.beekeepers=value;
             return this;
         }
@@ -62,13 +62,13 @@ public class Location implements Serializable {
         }
     }
     public Long getId() {
-        return id‭;
+        return LocIDd‭;
     }
     public String getLocationName‭‭() {
         return locationName‭;
     }
 
-        public List<Beekeeper> getBeekeepers(){
+        public Beekeeper getBeekeepers(){
         return beekeepers;
     }
         }
