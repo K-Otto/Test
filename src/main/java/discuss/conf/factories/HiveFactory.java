@@ -9,7 +9,7 @@ import java.util.List;
  * Created by student on 2015/09/13.
  */
 public class HiveFactory {
-    public static Hive create(String state, List<SubLocation> subLocations ){
+    public static Hive create(String state, SubLocation subLocations ){
         Hive hives = new Hive.Builder(state)
                 .subLocations (subLocations )
                 .build();

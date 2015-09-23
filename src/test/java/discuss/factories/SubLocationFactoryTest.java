@@ -1,5 +1,6 @@
 package discuss.factories;
 
+import discuss.conf.factories.BeekeeperFactory;
 import discuss.conf.factories.SubLocationFactory;
 import discuss.domain.Location;
 import discuss.domain.SubLocation;
@@ -17,14 +18,16 @@ import java.util.List;
 public class SubLocationFactoryTest {
     @Test
     public void testCreate() throws Exception {
-        List<Location> locations = new ArrayList<Location>();
+        Beekeeper beekeepers = BeekeeperFactory.create("karl", "otto", "karl1256@yahoo.com");
+        Location locations = LocationFactory.create("Darling",beekeepers );
         SubLocation location = SubLocationFactory.create("Olives", locations);
         Assert.assertEquals(location.getSubLocationName(), "Olives");
     }
 
     @Test
     public void testUpdate() throws Exception {
-        List<Location> locations = new ArrayList<Location>();
+        Beekeeper beekeepers = BeekeeperFactory.create("karl", "otto", "karl1256@yahoo.com");
+        Location locations = LocationFactory.create("Darling",beekeepers );
 
 
         SubLocation subLocations = SubLocationFactory.create("Fossil", locations);

@@ -9,28 +9,29 @@ import javax.persistence.*;
 @Entity
 public class Bucket implements Serializable {
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long bucketID;
 
     private Double weight;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private List<Harvest> harvests;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "harvestID")
+    private Harvest harvests;
 
 
     private Bucket() {
     }
 
     public Bucket(Builder builder) {
-        id = builder.id;
+        bucketID = builder.bucketID;
         weight = builder.weight;
 
     }
 
     public static class Builder {
-        private Long id;
+        private Long bucketID;
         private Double weight;
-        private List<Harvest> harvests;
+        private Harvest harvests;
 
 
         public Builder(Double weight) {
@@ -38,17 +39,17 @@ public class Bucket implements Serializable {
         }
 
         public Builder id(Long value) {
-            this.id = value;
+            this.bucketID = value;
             return this;
         }
 
-        public Builder harvests(List<Harvest> value) {
+        public Builder harvests(Harvest value) {
             this.harvests = value;
             return this;
         }
 
         public Builder copy(Bucket value) {
-            this.id = value.id;
+            this.bucketID = value.bucketID;
             this.weight = value.weight;
             this.harvests = value.harvests;
             return this;
@@ -60,14 +61,14 @@ public class Bucket implements Serializable {
     }
 
     public Long getId() {
-        return id;
+        return bucketID;
     }
 
     public Double getWeight() {
         return weight;
     }
 
-    public List<Harvest> getHarvests() {
+    public Harvest getHarvests() {
         return harvests;
     }
 }

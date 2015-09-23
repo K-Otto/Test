@@ -35,34 +35,38 @@ public class LocationCrudTest extends AbstractTestNGSpringContextTests {
     public void create() throws Exception {
         Beekeeper beekeepers = BeekeeperFactory.create("karl", "otto", "karl1256@yahoo.com");
 
-        Location role = LocationFactory.create("date", beekeepers);
-        repository.save(role);
-        id=role.getId();
-        Assert.assertNotNull(role);
+        Location locations = LocationFactory.create("Darling", beekeepers);
+        repository.save(locations);
+        id=locations.getId();
+        Assert.assertNotNull(locations);
+
+
+        System.out.println(locations.getId());
     }
+
 
     @Test(dependsOnMethods = "create")
     public void read() throws Exception {
         Location role = repository.findOne(id);
-        Assert.assertNotNull(role);
+
+        Assert.assertEquals("Darling",role.getLocationName‭‭());
 
     }
 
     @Test(dependsOnMethods = "read")
     public void update() throws Exception {
-        Beekeeper beekeepers = BeekeeperFactory.create("karl", "otto", "karl1256@yahoo.com");
         Location role = repository.findOne(id);
         Location newrole = new Location
-                .Builder‭(role.getLocationName‭‭())
-                .copy(role)
-                .beekeepers(beekeepers)
+                .Builder‭("Langebaan")
+                .ID(role.getId())
+                .beekeepers(role.getBeekeepers())
                 .build();
         // SAVE UPDATED ROLE
         repository.save(newrole);
 
         // GET THE SAVED ROLE
-        Location savedRole = repository.findOne(id);
-        Assert.assertEquals(savedRole.getBeekeepers(),beekeepers);
+
+        Assert.assertEquals(newrole.getLocationName‭‭(),"Langebaan");
     }
 
     @Test(dependsOnMethods = "update")

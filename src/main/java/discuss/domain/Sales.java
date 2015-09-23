@@ -10,35 +10,37 @@ import javax.persistence.*;
 @Entity
 public class Sales implements Serializable {
     @Id
-    private Long id;
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long salesID;
     private String SalesDate;
     private Double price;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private List<Bucket> buckets;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "bucketID")
+    private Bucket buckets;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private List<Customer> customers;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "custID")
+    private Customer customers;
 
 
     private Sales() {
     }
 
     public Sales(Builder builder) {
-        id = builder.id;
+        salesID = builder.salesID;
+        price=builder.price;
         SalesDate = builder.SalesDate;
-
+        customers = builder.customers;
+        buckets=builder.buckets;
     }
 
     public static class Builder {
-        private Long id;
+        private Long salesID;
         private String SalesDate;
         private Double price;
-        private List<Customer> customers;
-        private List<Bucket> buckets;
+        private Customer customers;
+        private Bucket buckets;
 
 
         public Builder(String SalesDate) {
@@ -46,7 +48,7 @@ public class Sales implements Serializable {
         }
 
         public Builder id(Long value) {
-            this.id = value;
+            this.salesID = value;
             return this;
         }
 
@@ -55,18 +57,18 @@ public class Sales implements Serializable {
             return this;
         }
 
-        public Builder customers(List<Customer> value) {
+        public Builder customers(Customer value) {
             this.customers = value;
             return this;
         }
 
-        public Builder buckets(List<Bucket> value) {
+        public Builder buckets(Bucket value) {
             this.buckets = value;
             return this;
         }
 
         public Builder copy(Sales value) {
-            this.id = value.id;
+            this.salesID = value.salesID;
             this.SalesDate = value.SalesDate;
             this.price = value.price;
 
@@ -81,7 +83,7 @@ public class Sales implements Serializable {
     }
 
     public Long getId() {
-        return id;
+        return salesID;
     }
 
     public String getSalesDate() {
@@ -92,11 +94,11 @@ public class Sales implements Serializable {
         return price;
     }
 
-    public List<Customer> getCustomers() {
+    public Customer getCustomers() {
         return customers;
     }
 
-    public List<Bucket> getBuckets() {
+    public Bucket getBuckets() {
         return buckets;
     }
 }

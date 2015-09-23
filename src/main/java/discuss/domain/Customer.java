@@ -9,7 +9,8 @@ import javax.persistence.*;
 @Entity
 public class Customer  implements Serializable {
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long custID;
 
     private String firstName;
     private String lastName;
@@ -18,22 +19,23 @@ public class Customer  implements Serializable {
 
     private Customer () {
     }
-    public Long getId() {
-        return id;
+
+
+    public long getId() {
+        return custID;
     }
     public String getFirstName() {
         return firstName;
     }
-
     public String getLastName() {
         return lastName;
     }
-
     public String getEmail() {
         return email;
     }
 
-    public Customer (Builder builder){
+    public Customer(Builder builder){
+        custID=builder.custID;
         firstName=builder.firstName;
         lastName=builder.lastName;
         email=builder.email;
@@ -43,7 +45,7 @@ public class Customer  implements Serializable {
         private String firstName;
         private String lastName;
         private String email;
-
+        private long custID;
         public Builder(String lastName) {
             this.lastName = lastName;
         }
@@ -59,14 +61,15 @@ public class Customer  implements Serializable {
 
         }
         public Builder copy(Customer value){
+            this.custID = value.custID;
             this.lastName =value.lastName ;
             this.firstName=value.firstName;
             this.email=value.email;
             return this;
         }
 
-        public Customer  build(){
-            return new Customer (this);
+        public Customer build(){
+            return new Customer(this);
         }
     }
 }

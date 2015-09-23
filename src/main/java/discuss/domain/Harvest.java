@@ -10,14 +10,15 @@ import javax.persistence.*;
 @Entity
 public class Harvest implements Serializable {
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long harvestID;
 
     private String harvestDate ;
     private Double weight;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name="user_id")
-    private List<SubLocation > subLocations;
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name="subLocID")
+    private SubLocation  subLocations;
 
 
 
@@ -25,15 +26,16 @@ public class Harvest implements Serializable {
     }
 
     public Harvest(Builder builder) {
-        id=builder.id;
+        harvestID=builder.harvestID;
         harvestDate=builder.harvestDate  ;
         weight=builder.weight;
+        subLocations=builder.subLocations;
     }
     public static class Builder{
-        private Long id;
+        private Long harvestID;
         private String harvestDate  ;
         private Double weight;
-        private List<SubLocation > subLocations;
+        private SubLocation  subLocations;
 
 
         public Builder(String harvestDate  ) {
@@ -41,7 +43,7 @@ public class Harvest implements Serializable {
         }
 
         public Builder id(Long value){
-            this.id = value;
+            this.harvestID = value;
             return this;
         }
         public Builder weight(Double value){
@@ -49,13 +51,13 @@ public class Harvest implements Serializable {
             return this;
         }
 
-        public Builder subLocations(List<SubLocation > value){
+        public Builder subLocations(SubLocation value){
             this.subLocations=value;
             return this;
         }
 
         public Builder copy(Harvest  value){
-            this.id = value.id;
+            this.harvestID = value.harvestID;
             this.harvestDate  =value.harvestDate  ;
             this.weight  =value.weight  ;
             this.subLocations=value.subLocations;
@@ -66,7 +68,7 @@ public class Harvest implements Serializable {
         }
     }
     public Long getId() {
-        return id;
+        return harvestID;
     }
 
     public String getHarvestDate () {
@@ -77,7 +79,7 @@ public class Harvest implements Serializable {
         return weight;
     }
 
-    public List<SubLocation> getSubLocation() {
+    public SubLocation getSubLocation() {
         return subLocations;
     }
 }

@@ -1,10 +1,8 @@
 package discuss.repositories;
 
 import discuss.App;
-import discuss.conf.factories.SalesFactory;
-import discuss.domain.Bucket;
-import discuss.domain.Customer;
-import discuss.domain.Sales;
+import discuss.conf.factories.*;
+import discuss.domain.*;
 import discuss.respository.SalesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -32,9 +30,13 @@ public class SalesCrudTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void create() throws Exception {
-        List<Customer> jobs = new ArrayList<Customer>();
-        List<Bucket> buc = new ArrayList<Bucket>();
-        Sales role = SalesFactory.create("date", 23.00,buc, jobs);
+        Beekeeper beekeepers = BeekeeperFactory.create("karl", "otto", "karl1256@yahoo.com");
+        Location locations = LocationFactory.create("Darling", beekeepers);
+        SubLocation subLocations = SubLocationFactory.create("Fossil", locations);
+        Harvest harvests = HarvestFactory.create("Fossil", 66.00, subLocations);
+        Customer customers = CustomerFactory.create("","","");
+        Bucket buckets = BucketFactory.create( 66.00, harvests);
+        Sales role = SalesFactory.create("date", 22.00,buckets, customers);
         repository.save(role);
         id=role.getId();
         Assert.assertNotNull(role);
@@ -49,18 +51,18 @@ public class SalesCrudTest extends AbstractTestNGSpringContextTests {
 
     @Test(dependsOnMethods = "read")
     public void update() throws Exception {
+
         Sales role = repository.findOne(id);
         Sales newrole = new Sales
                 .Builder(role.getSalesDate())
                 .copy(role)
-                .price(22.00)
                 .build();
         // SAVE UPDATED ROLE
         repository.save(newrole);
 
         // GET THE SAVED ROLE
-        Sales savedRole = repository.findOne(id);
-        Assert.assertEquals(savedRole.getPrice(),22.00);
+
+        Assert.assertEquals(newrole.getPrice(),22.00);
     }
 
     @Test(dependsOnMethods = "update")

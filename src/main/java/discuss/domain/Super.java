@@ -10,28 +10,29 @@ import javax.persistence.*;
 @Entity
 public class Super implements Serializable {
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long superID;
 
     private String superState;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private List<Hive> hives;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "hiveID")
+    private Hive hives;
 
 
     private Super() {
     }
 
     public Super(Builder builder) {
-        id = builder.id;
+        superID = builder.superID;
         superState = builder.superState;
-
+        hives=builder.hives;
     }
 
     public static class Builder {
-        private Long id;
+        private Long superID;
         private String superState;
-        private List<Hive> hives;
+        private Hive hives;
 
 
         public Builder(String superState) {
@@ -39,17 +40,17 @@ public class Super implements Serializable {
         }
 
         public Builder id(Long value) {
-            this.id = value;
+            this.superID = value;
             return this;
         }
 
-        public Builder hives(List<Hive> value) {
+        public Builder hives(Hive value) {
             this.hives = value;
             return this;
         }
 
         public Builder copy(Super value) {
-            this.id = value.id;
+            this.superID = value.superID;
             this.superState = value.superState;
             this.hives = value.hives;
             return this;
@@ -61,14 +62,14 @@ public class Super implements Serializable {
     }
 
     public Long getId() {
-        return id;
+        return superID;
     }
 
     public String getSuperState() {
         return superState;
     }
 
-    public List<Hive> getHives() {
+    public Hive getHives() {
         return hives;
     }
 }

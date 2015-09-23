@@ -1,8 +1,13 @@
 package discuss.repositories;
 
 import discuss.App;
+import discuss.conf.factories.BeekeeperFactory;
 import discuss.conf.factories.HiveFactory;
+import discuss.conf.factories.LocationFactory;
+import discuss.conf.factories.SubLocationFactory;
+import discuss.domain.Beekeeper;
 import discuss.domain.Hive;
+import discuss.domain.Location;
 import discuss.domain.SubLocation;
 import discuss.respository.HiveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +36,13 @@ public class HiveCrudTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void create() throws Exception {
-        List<SubLocation> jobs = new ArrayList<SubLocation>();
+        Beekeeper beekeepers = BeekeeperFactory.create("karl", "otto", "karl1256@yahoo.com");
+        Location locations = LocationFactory.create("Darling", beekeepers);
 
-        Hive role = HiveFactory.create("date", jobs);
+
+        SubLocation subLocations = SubLocationFactory.create("Fossil", locations);
+
+        Hive role = HiveFactory.create("Active", subLocations);
         repository.save(role);
         id=role.getId();
         Assert.assertNotNull(role);
@@ -48,19 +57,19 @@ public class HiveCrudTest extends AbstractTestNGSpringContextTests {
 
     @Test(dependsOnMethods = "read")
     public void update() throws Exception {
-        List<SubLocation> jobs = new ArrayList<SubLocation>();
+      ;
         Hive role = repository.findOne(id);
         Hive newrole = new Hive
                 .Builder(role.getHiveState())
                 .copy(role)
-                .subLocations(jobs)
+                .subLocations(role.getSubLocation())
                 .build();
         // SAVE UPDATED ROLE
         repository.save(newrole);
 
         // GET THE SAVED ROLE
         Hive savedRole = repository.findOne(id);
-        Assert.assertEquals(savedRole.getSubLocation(),jobs);
+        Assert.assertEquals(savedRole.getHiveState(),"Active");
     }
 
     @Test(dependsOnMethods = "update")

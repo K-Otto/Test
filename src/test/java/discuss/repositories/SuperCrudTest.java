@@ -1,11 +1,8 @@
 package discuss.repositories;
 
 import discuss.App;
-import discuss.conf.factories.HiveFactory;
-import discuss.conf.factories.SuperFactory;
-import discuss.domain.Hive;
-import discuss.domain.SubLocation;
-import discuss.domain.Super;
+import discuss.conf.factories.*;
+import discuss.domain.*;
 import discuss.respository.HiveRepository;
 import discuss.respository.SuperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +31,14 @@ public class SuperCrudTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void create() throws Exception {
-        List<Hive> jobs = new ArrayList<Hive>();
+        Beekeeper beekeepers = BeekeeperFactory.create("karl", "otto", "karl1256@yahoo.com");
+        Location locations = LocationFactory.create("Darling", beekeepers);
 
-        Super role = SuperFactory.create("date", jobs);
+
+        SubLocation subLocations = SubLocationFactory.create("Fossil", locations);
+        Hive hives = HiveFactory.create("Active", subLocations);
+
+        Super role = SuperFactory.create("Active", hives);
         repository.save(role);
         id=role.getId();
         Assert.assertNotNull(role);
@@ -51,19 +53,21 @@ public class SuperCrudTest extends AbstractTestNGSpringContextTests {
 
     @Test(dependsOnMethods = "read")
     public void update() throws Exception {
-        List<Hive> jobs = new ArrayList<Hive>();
+
+
+
+
         Super role = repository.findOne(id);
         Super newrole = new Super
                 .Builder(role.getSuperState())
                 .copy(role)
-                .hives(jobs)
                 .build();
         // SAVE UPDATED ROLE
         repository.save(newrole);
 
         // GET THE SAVED ROLE
         Super savedRole = repository.findOne(id);
-        Assert.assertEquals(savedRole.getHives(),jobs);
+        Assert.assertEquals(savedRole.getSuperState(),"Active");
     }
 
     @Test(dependsOnMethods = "update")

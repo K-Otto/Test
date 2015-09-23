@@ -1,11 +1,8 @@
 package discuss.repositories;
 
 import discuss.App;
-import discuss.conf.factories.HarvestFactory;
-import discuss.conf.factories.HiveFactory;
-import discuss.domain.Harvest;
-import discuss.domain.Hive;
-import discuss.domain.SubLocation;
+import discuss.conf.factories.*;
+import discuss.domain.*;
 import discuss.respository.HarvestRepository;
 import discuss.respository.HiveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +31,11 @@ public class HarvestCrudTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void create() throws Exception {
-        List<SubLocation> jobs = new ArrayList<SubLocation>();
+        Beekeeper beekeepers = BeekeeperFactory.create("karl", "otto", "karl1256@yahoo.com");
+        Location locations = LocationFactory.create("Darling", beekeepers);
+        SubLocation subLocations = SubLocationFactory.create("Fossil", locations);
 
-        Harvest role = HarvestFactory.create("date", 22.00, jobs);
+        Harvest role = HarvestFactory.create("date", 22.00, subLocations);
         repository.save(role);
         id=role.getId();
         Assert.assertNotNull(role);
@@ -51,19 +50,19 @@ public class HarvestCrudTest extends AbstractTestNGSpringContextTests {
 
     @Test(dependsOnMethods = "read")
     public void update() throws Exception {
-        List<SubLocation> jobs = new ArrayList<SubLocation>();
+
         Harvest role = repository.findOne(id);
         Harvest newrole = new Harvest
                 .Builder(role.getHarvestDate())
                 .copy(role)
-                .subLocations(jobs)
+
                 .build();
         // SAVE UPDATED ROLE
         repository.save(newrole);
 
         // GET THE SAVED ROLE
         Harvest savedRole = repository.findOne(id);
-        Assert.assertEquals(savedRole.getSubLocation(),jobs);
+        Assert.assertEquals(savedRole.getHarvestDate(),"date");
     }
 
     @Test(dependsOnMethods = "update")

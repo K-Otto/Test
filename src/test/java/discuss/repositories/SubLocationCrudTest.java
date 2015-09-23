@@ -3,7 +3,10 @@ package discuss.repositories;
 import discuss.App;
 
 
+import discuss.conf.factories.BeekeeperFactory;
+import discuss.conf.factories.LocationFactory;
 import discuss.conf.factories.SubLocationFactory;
+import discuss.domain.Beekeeper;
 import discuss.domain.Location;
 import discuss.domain.SubLocation;
 
@@ -35,9 +38,10 @@ public class SubLocationCrudTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void create() throws Exception {
-        List<Location> jobs = new ArrayList<Location>();
+        Beekeeper beekeepers = BeekeeperFactory.create("karl", "otto", "karl1256@yahoo.com");
+        Location locations = LocationFactory.create("Darling", beekeepers);
 
-        SubLocation role = SubLocationFactory.create("date", jobs);
+        SubLocation role = SubLocationFactory.create("Waterhole1", locations);
         repository.save(role);
         id=role.getId();
         Assert.assertNotNull(role);
@@ -52,19 +56,18 @@ public class SubLocationCrudTest extends AbstractTestNGSpringContextTests {
 
     @Test(dependsOnMethods = "read")
     public void update() throws Exception {
-        List<Location> jobs = new ArrayList<Location>();
+
         SubLocation role = repository.findOne(id);
         SubLocation newrole = new SubLocation
                 .Builder(role.getSubLocationName())
                 .copy(role)
-                .locations(jobs)
                 .build();
         // SAVE UPDATED ROLE
         repository.save(newrole);
 
         // GET THE SAVED ROLE
         SubLocation savedRole = repository.findOne(id);
-        Assert.assertEquals(savedRole.getLocation(),jobs);
+        Assert.assertEquals(savedRole.getSubLocationName(),"Waterhole1");
     }
 
     @Test(dependsOnMethods = "update")

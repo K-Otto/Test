@@ -39,4 +39,37 @@ public class BeekeeperCrudTest extends AbstractTestNGSpringContextTests{
     }
 
 
+    @Test(dependsOnMethods = "create")
+    public void read() throws Exception {
+        Beekeeper role = repository.findOne(id);
+
+        Assert.assertEquals("karl",role.getFirstName());
+
+    }
+
+    @Test(dependsOnMethods = "read")
+    public void update() throws Exception {
+        Beekeeper role = repository.findOne(id);
+        Beekeeper newrole = new Beekeeper
+                .Builder(role.getFirstName())
+                .copy(role)
+                .email("karl1256@gmail.com")
+                .build();
+        // SAVE UPDATED ROLE
+        repository.save(newrole);
+
+        // GET THE SAVED ROLE
+        Beekeeper savedRole = repository.findOne(id);
+        Assert.assertEquals(savedRole.getEmail(),"karl1256@gmail.com");
+    }
+
+    @Test(dependsOnMethods = "update")
+    public void delete() throws Exception {
+        Beekeeper role = repository.findOne(id);
+        repository.delete(role);
+        Beekeeper deletedRole = repository.findOne(id);
+        Assert.assertNull(deletedRole);
+
+    }
 }
+

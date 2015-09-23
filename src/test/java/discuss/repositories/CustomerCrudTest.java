@@ -3,9 +3,11 @@ package discuss.repositories;
 import discuss.App;
 import discuss.conf.factories.BucketFactory;
 import discuss.conf.factories.CustomerFactory;
+import discuss.conf.factories.SalesFactory;
 import discuss.domain.Bucket;
 import discuss.domain.Customer;
 import discuss.domain.Harvest;
+import discuss.domain.Sales;
 import discuss.respository.BucketRepository;
 import discuss.respository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,22 +32,27 @@ import java.util.List;
 
 public class CustomerCrudTest extends AbstractTestNGSpringContextTests{
 
-    private Long id;
+    private long id;
     @Autowired
     private CustomerRepository repository;
 
     @Test
     public void create() throws Exception {
-        Customer role = CustomerFactory.create("ADMIN", "System Administrator", "");
-        repository.save(role);
-        id=role.getId();
-        Assert.assertNotNull(role);
+
+        Customer customers = CustomerFactory.create("karl", "otto", "karl1256@yahoo.com");
+
+        repository.save(customers);
+        id=customers.getId();
+        Assert.assertNotNull(customers.getId());
+        System.out.println(customers.getId());
     }
+
 
     @Test(dependsOnMethods = "create")
     public void read() throws Exception {
         Customer role = repository.findOne(id);
-        Assert.assertNotNull(role);
+
+        Assert.assertEquals("karl",role.getFirstName());
 
     }
 
@@ -55,14 +62,14 @@ public class CustomerCrudTest extends AbstractTestNGSpringContextTests{
         Customer newrole = new Customer
                 .Builder(role.getFirstName())
                 .copy(role)
-                .email("SYS ADMIN")
+                .email("karl1256@gmail.com")
                 .build();
         // SAVE UPDATED ROLE
         repository.save(newrole);
 
         // GET THE SAVED ROLE
         Customer savedRole = repository.findOne(id);
-        Assert.assertEquals(savedRole.getEmail(),"SYS ADMIN");
+        Assert.assertEquals(savedRole.getEmail(),"karl1256@gmail.com");
     }
 
     @Test(dependsOnMethods = "update")

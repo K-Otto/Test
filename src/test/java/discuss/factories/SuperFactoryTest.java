@@ -1,8 +1,7 @@
 package discuss.factories;
 
-import discuss.conf.factories.SuperFactory;
-import discuss.domain.Hive;
-import discuss.domain.Super;
+import discuss.conf.factories.*;
+import discuss.domain.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.util.ArrayList;
@@ -14,14 +13,24 @@ import java.util.List;
 public class SuperFactoryTest {
     @Test
     public void testCreate() throws Exception {
-        List<Hive> hives = new ArrayList<Hive>();
+        Beekeeper beekeepers = BeekeeperFactory.create("karl", "otto", "karl1256@yahoo.com");
+        Location locations = LocationFactory.create("Darling", beekeepers);
+
+
+        SubLocation subLocations = SubLocationFactory.create("Fossil", locations);
+        Hive hives = HiveFactory.create("sss", subLocations);
         Super supers = SuperFactory.create("sss", hives);
         Assert.assertEquals(supers.getSuperState(), "sss");
     }
 
     @Test
     public void testUpdate() throws Exception {
-        List<Hive> hives = new ArrayList<Hive>();
+        Beekeeper beekeepers = BeekeeperFactory.create("karl", "otto", "karl1256@yahoo.com");
+        Location locations = LocationFactory.create("Darling",beekeepers );
+
+
+        SubLocation subLocations = SubLocationFactory.create("Fossil", locations);
+        Hive hives = HiveFactory.create("sss", subLocations);
 
 
         Super supers = SuperFactory.create("Fossil", hives);

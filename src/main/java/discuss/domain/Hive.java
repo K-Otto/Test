@@ -9,13 +9,14 @@ import javax.persistence.*;
 @Entity
 public class Hive implements Serializable {
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long hiveID;
 
     private String hiveState ;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name="user_id")
-    private List<SubLocation> subLocations;
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name="subLocID")
+    private SubLocation subLocations;
 
 
 
@@ -23,14 +24,14 @@ public class Hive implements Serializable {
     }
 
     public Hive(Builder builder) {
-        id=builder.id;
+        hiveID=builder.hiveID;
         hiveState=builder.hiveState ;
-
+        subLocations=builder.subLocations;
     }
     public static class Builder{
-        private Long id;
+        private Long hiveID;
         private String hiveState ;
-        private List<SubLocation> subLocations;
+        private SubLocation subLocations;
 
 
         public Builder(String hiveState ) {
@@ -38,17 +39,17 @@ public class Hive implements Serializable {
         }
 
         public Builder id(Long value){
-            this.id = value;
+            this.hiveID = value;
             return this;
         }
 
-        public Builder subLocations(List<SubLocation> value){
+        public Builder subLocations(SubLocation value){
             this.subLocations=value;
             return this;
         }
 
         public Builder copy(Hive  value){
-            this.id = value.id;
+            this.hiveID = value.hiveID;
             this.hiveState =value.hiveState ;
             this.subLocations=value.subLocations;
             return this;
@@ -58,13 +59,13 @@ public class Hive implements Serializable {
         }
     }
     public Long getId() {
-        return id;
+        return hiveID;
     }
 
     public String getHiveState() {
         return hiveState;
     }
-        public List<SubLocation> getSubLocation() {
+        public SubLocation getSubLocation() {
             return subLocations;
         }
 

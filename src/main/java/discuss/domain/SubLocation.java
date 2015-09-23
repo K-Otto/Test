@@ -10,28 +10,29 @@ import javax.persistence.*;
 @Entity
 public class SubLocation implements Serializable {
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long subLocID;
 
     private String subLocationName;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private List<Location> locations;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "locID")
+    private Location locations;
 
 
     private SubLocation() {
     }
 
     public SubLocation(Builder builder) {
-        id = builder.id;
+        subLocID = builder.subLocID;
         subLocationName = builder.subLocationName;
-
+        locations=builder.locations;
     }
 
     public static class Builder {
-        private Long id;
+        private Long subLocID;
         private String subLocationName;
-        private List<Location> locations;
+        private Location locations;
 
 
         public Builder(String subLocationName) {
@@ -39,17 +40,17 @@ public class SubLocation implements Serializable {
         }
 
         public Builder id(Long value) {
-            this.id = value;
+            this.subLocID = value;
             return this;
         }
 
-        public Builder locations(List<Location> value) {
+        public Builder locations(Location value) {
             this.locations = value;
             return this;
         }
 
         public Builder copy(SubLocation value) {
-            this.id = value.id;
+            this.subLocID = value.subLocID;
             this.subLocationName = value.subLocationName;
             this.locations = value.locations;
             return this;
@@ -61,14 +62,14 @@ public class SubLocation implements Serializable {
     }
 
     public Long getId() {
-        return id;
+        return subLocID;
     }
 
     public String getSubLocationName() {
         return subLocationName;
     }
 
-    public List<Location> getLocation() {
+    public Location getLocation() {
         return locations;
     }
 }

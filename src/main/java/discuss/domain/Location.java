@@ -10,13 +10,14 @@ import javax.persistence.*;
 @Entity
 public class Location implements Serializable {
     @Id
-    private Long LocIDd‭;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long LocID;
 
     private String locationName‭;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "beeID")
-    Beekeeper beekeepers;
+    private Beekeeper beekeepers;
 
 
     private Location() {
@@ -28,11 +29,12 @@ public class Location implements Serializable {
     public Location (Builder‭ builder)
     {
         locationName‭=builder.locationName‭;
-        LocIDd‭=builder.id‭;
+        LocID=builder.LocID;
+        beekeepers=builder.beekeepers;
     }
 
     public static class Builder‭{
-        private Long id‭;
+        private Long LocID;
         private String locationName‭;
         private Beekeeper beekeepers;
 
@@ -42,7 +44,7 @@ public class Location implements Serializable {
         }
 
         public Builder‭ ID(Long value‭){
-            this.id‭ = value‭;
+            this.LocID = value‭;
             return this;
         }
 
@@ -52,7 +54,7 @@ public class Location implements Serializable {
         }
 
         public Builder‭ copy(Location value){
-
+            this.LocID=value.LocID;
             this.locationName‭=value.locationName‭;
             this.beekeepers=value.beekeepers;
             return this;
@@ -62,7 +64,7 @@ public class Location implements Serializable {
         }
     }
     public Long getId() {
-        return LocIDd‭;
+        return LocID;
     }
     public String getLocationName‭‭() {
         return locationName‭;

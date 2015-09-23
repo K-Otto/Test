@@ -1,9 +1,8 @@
 package discuss.repositories;
 
 import discuss.App;
-import discuss.conf.factories.BucketFactory;
-import discuss.domain.Bucket;
-import discuss.domain.Harvest;
+import discuss.conf.factories.*;
+import discuss.domain.*;
 import discuss.respository.BucketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -32,9 +31,12 @@ import java.util.List;
 
         @Test
         public void create() throws Exception {
-            List<Harvest> jobs = new ArrayList<Harvest>();
+            Beekeeper beekeepers = BeekeeperFactory.create("karl", "otto", "karl1256@yahoo.com");
+            Location locations = LocationFactory.create("Darling", beekeepers);
+            SubLocation subLocations = SubLocationFactory.create("Fossil", locations);
+            Harvest harvests = HarvestFactory.create("Fossil", 66.00, subLocations);
 
-            Bucket role = BucketFactory.create( 22.00, jobs);
+            Bucket role = BucketFactory.create( 22.00, harvests);
             repository.save(role);
             id=role.getId();
             Assert.assertNotNull(role);
@@ -49,19 +51,20 @@ import java.util.List;
 
         @Test(dependsOnMethods = "read")
         public void update() throws Exception {
-            List<Harvest> jobs = new ArrayList<Harvest>();
+
+
             Bucket role = repository.findOne(id);
             Bucket newrole = new Bucket
                     .Builder(role.getWeight())
                     .copy(role)
-                    .harvests(jobs)
+
                     .build();
             // SAVE UPDATED ROLE
             repository.save(newrole);
 
             // GET THE SAVED ROLE
             Bucket savedRole = repository.findOne(id);
-            Assert.assertEquals(savedRole.getHarvests(),jobs);
+            Assert.assertEquals(savedRole.getWeight(),22.00);
         }
 
         @Test(dependsOnMethods = "update")

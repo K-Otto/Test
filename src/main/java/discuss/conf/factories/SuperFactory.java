@@ -9,7 +9,7 @@ import java.util.List;
  * Created by student on 2015/09/13.
  */
 public class SuperFactory {
-    public static Super create(String state, List<Hive> hives){
+    public static Super create(String state, Hive hives){
         Super supers= new Super.Builder(state)
                 .hives(hives)
                 .build();
