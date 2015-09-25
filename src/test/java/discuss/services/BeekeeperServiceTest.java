@@ -38,11 +38,7 @@ public class BeekeeperServiceTest  extends AbstractTestNGSpringContextTests {
                 .create("Active", hives);
         service.saveBeekeeper(beekeepers.getFirstName(),
                 beekeepers.getLastName(),
-                beekeepers.getEmail(),
-                locations.getLocationName‭‭(),
-                sublocations.getSubLocationName(),
-                hives.getHiveState(),
-                supers.getSuperState());
+                beekeepers.getEmail());
 
         
         id = beekeepers.getId();

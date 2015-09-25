@@ -8,11 +8,7 @@ import discuss.domain.Beekeeper;
 public interface BeekeeperService {
     String saveBeekeeper(String firstName,
                         String lastName,
-                        String Email,
-                        String LocationName,
-                        String SubLocationName,
-                        String HiveState,
-                        String SuperState
+                        String Email
     );
 
     Beekeeper getBeekeeper(Long id);

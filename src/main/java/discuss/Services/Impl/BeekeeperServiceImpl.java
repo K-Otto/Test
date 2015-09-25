@@ -20,21 +20,10 @@ public class BeekeeperServiceImpl  implements BeekeeperService{
     @Override
     public String saveBeekeeper(String firstName,
                                 String lastName,
-                                String Email,
-                                String LocationName,
-                                String SubLocationName,
-                                String HiveState,
-                                String SuperState) {
+                                String Email) {
         Beekeeper beekeepers = BeekeeperFactory
                 .create(firstName, lastName,Email);
-        Location locations = LocationFactory
-                .create(LocationName, beekeepers);
-        SubLocation sublocations = SubLocationFactory
-                .create(SubLocationName, locations );
-        Hive hives = HiveFactory
-                .create(HiveState, sublocations);
-        Super supers = SuperFactory
-                .create(SuperState, hives);
+
         return repository.save(beekeepers).toString();
 
     }
