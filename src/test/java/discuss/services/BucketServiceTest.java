@@ -38,9 +38,17 @@ public class BucketServiceTest extends AbstractTestNGSpringContextTests {
         Bucket buckets = BucketFactory
                 .create(22.00, harvests);
 
+
         service.saveBucket(
                 buckets.getWeight(),
-                buckets.getHarvests());
+                harvests.getHarvestDate(),
+                harvests.getWeight(),
+                sublocations.getSubLocationName(),
+                locations.getLocationName‭‭(),
+                beekeepers.getFirstName(),
+                beekeepers.getLastName(),
+                beekeepers.getEmail()
+               );
 
 
         id = buckets.getId();

@@ -29,7 +29,7 @@ public class BeekeeperServiceImpl  implements BeekeeperService{
     }
 
     @Override
-    public Beekeeper getBeekeeper (Long id) {
+    public Beekeeper getBeekeeper (long id) {
 
         return repository.findOne(id);
     }

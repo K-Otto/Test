@@ -8,8 +8,10 @@ import discuss.domain.Location;
  */
 public interface LocationService {
     String saveLocation(String locationName,
-                         Beekeeper beekeeper
+                         String firstname,
+                         String lastname,
+                         String email
     );
 
-    Location getLocation(Long id);
+    Location getLocation(long id);
 }

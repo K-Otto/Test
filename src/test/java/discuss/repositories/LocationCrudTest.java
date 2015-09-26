@@ -37,11 +37,11 @@ public class LocationCrudTest extends AbstractTestNGSpringContextTests {
 
         Location locations = LocationFactory.create("Darling", beekeepers);
         repository.save(locations);
-        id=locations.getId();
+        id=locations.getLocID();
         Assert.assertNotNull(locations);
 
 
-        System.out.println(locations.getId());
+        System.out.println(locations.getLocID());
     }
 
 
@@ -58,7 +58,7 @@ public class LocationCrudTest extends AbstractTestNGSpringContextTests {
         Location role = repository.findOne(id);
         Location newrole = new Location
                 .Builder‭("Langebaan")
-                .ID(role.getId())
+                .ID(role.getLocID())
                 .beekeepers(role.getBeekeepers())
                 .build();
         // SAVE UPDATED ROLE

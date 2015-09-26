@@ -1,9 +1,8 @@
 package discuss.Services.Impl;
 
 import discuss.Services.BucketService;
-import discuss.conf.factories.BucketFactory;
-import discuss.domain.Bucket;
-import discuss.domain.Harvest;
+import discuss.conf.factories.*;
+import discuss.domain.*;
 import discuss.respository.BucketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,10 +18,26 @@ public class BucketServiceImpl implements BucketService {
 
     @Override
     public String saveBucket(
-                              double weight,
-                              Harvest harvests) {
+            double bucWeight,
+            String harvestDate,
+            double harWeight,
+            String subLocationName,
+            String locationName,
+            String bFirstname,
+            String bLastname,
+            String bEmail) {
+        Beekeeper beekeepers = BeekeeperFactory
+                .create(bFirstname, bLastname, bEmail);
+
+        Location locations = LocationFactory
+                .create(locationName, beekeepers);
+        SubLocation subLocations = SubLocationFactory
+                .create(subLocationName, locations);
+        Harvest harvests =  HarvestFactory
+                .create(harvestDate, harWeight, subLocations);
         Bucket buckets =  BucketFactory
-                .create(weight, harvests);
+                .create(bucWeight, harvests);
+
 
         return repository.save(buckets).toString();
 

@@ -33,10 +33,12 @@ public class LocationServiceTest extends AbstractTestNGSpringContextTests {
                 .create("Darling", beekeepers);
 
         service.saveLocation(locations.getLocationName‭‭(),
-                locations.getBeekeepers());
+                beekeepers.getFirstName(),
+                beekeepers.getLastName(),
+                beekeepers.getEmail());
 
 
-        id = locations.getId();
+        id = locations.getLocID();
         locationGlobal = locations;
         Assert.assertNotNull(locations);
     }
@@ -46,8 +48,9 @@ public class LocationServiceTest extends AbstractTestNGSpringContextTests {
         // Get subject
         String idtest = id + "";
         Long longId = Long.parseLong(idtest);
-        Location locations = service.getLocation(longId);
-        locationGlobal = service.getLocation(longId);
+        Location locations = service.getLocation(1);
+        id = locations.getLocID();
+        locationGlobal = service.getLocation(id);
         Assert.assertNotNull(locationGlobal);
     }
 

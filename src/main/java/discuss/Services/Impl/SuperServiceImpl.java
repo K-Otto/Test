@@ -1,9 +1,8 @@
 package discuss.Services.Impl;
 
 import discuss.Services.SuperService;
-import discuss.conf.factories.SuperFactory;
-import discuss.domain.Hive;
-import discuss.domain.Super;
+import discuss.conf.factories.*;
+import discuss.domain.*;
 import discuss.respository.SuperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,21 @@ public class SuperServiceImpl implements SuperService {
 
     @Override
     public String saveSuper(String superState,
-                               Hive hives) {
+                            String hiveState,
+                            String subLocationName,
+                            String locationName,
+                            String firstname,
+                            String lastname,
+                            String email) {
+        Beekeeper beekeepers = BeekeeperFactory
+                .create(firstname, lastname, email);
+
+        Location locations = LocationFactory
+                .create(locationName, beekeepers);
+        SubLocation subLocations = SubLocationFactory
+                .create(subLocationName, locations);
+        Hive hives = HiveFactory
+                .create(hiveState, subLocations);
         Super supers = SuperFactory
                 .create(superState, hives);
 

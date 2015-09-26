@@ -8,8 +8,12 @@ import discuss.domain.SubLocation;
  */
 public interface HarvestService {
     String saveHarvest(String harvestDate,
-                       double weight,
-                           SubLocation subLocations
+                       double harWeight,
+                       String subLocationName,
+                       String locationName,
+                       String firstname,
+                       String lastname,
+                       String email
     );
 
     Harvest getHarvest(Long id);

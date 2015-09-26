@@ -41,7 +41,10 @@ public class SubLocationServiceTest extends AbstractTestNGSpringContextTests {
                 .create("Waterhole", locations);
 
         service.saveSubLocation(sublocations.getSubLocationName(),
-                sublocations.getLocation());
+                locations.getLocationName‭‭(),
+                beekeepers.getFirstName(),
+                beekeepers.getLastName(),
+                beekeepers.getEmail());
 
 
         id = sublocations.getId();

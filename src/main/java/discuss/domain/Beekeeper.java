@@ -23,7 +23,7 @@ public class Beekeeper implements Serializable {
     private Beekeeper() {
     }
 
-    public Long getId() {
+    public Long getBeeId() {
         return beeID;
     }
     public String getFirstName() {

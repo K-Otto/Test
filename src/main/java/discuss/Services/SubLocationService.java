@@ -8,7 +8,10 @@ import discuss.domain.SubLocation;
  */
 public interface SubLocationService {
     String saveSubLocation(String subLocationName,
-                        Location locations
+                           String locationName,
+                           String firstname,
+                           String lastname,
+                           String email
     );
 
     SubLocation getSubLocation(Long id);

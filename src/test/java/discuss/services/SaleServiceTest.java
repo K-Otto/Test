@@ -32,8 +32,7 @@ public class SaleServiceTest extends AbstractTestNGSpringContextTests {
                 .create("Karl", "Otto", "Karl@gmail.com");
         Location locations = LocationFactory
                 .create("Darling", beekeepers);
-        Customer customers = CustomerFactory
-                .create("Piet", "pieter", "Karl@gmail.com");
+
 
         SubLocation sublocations = SubLocationFactory
                 .create("Waterhole", locations);
@@ -41,13 +40,24 @@ public class SaleServiceTest extends AbstractTestNGSpringContextTests {
                 .create("December", 22.00, sublocations);
         Bucket buckets = BucketFactory
                 .create(22.00, harvests);
+        Customer customers = CustomerFactory
+                .create("Piet", "pieter", "Karl@gmail.com");
         Sales sales = SalesFactory
                 .create("December", 22.00, buckets,customers);
 
         service.saveSales(sales.getSalesDate(),
                 sales.getPrice(),
-                sales.getBuckets(),
-                sales.getCustomers());
+                buckets.getWeight(),
+                harvests.getHarvestDate(),
+                harvests.getWeight(),
+                sublocations.getSubLocationName(),
+                locations.getLocationName‭‭(),
+                beekeepers.getFirstName(),
+                beekeepers.getLastName(),
+                beekeepers.getEmail(),
+                customers.getFirstName(),
+                customers.getLastName(),
+                customers.getEmail());
 
 
         id = sales.getId();

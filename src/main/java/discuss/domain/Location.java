@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Location implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long LocID;
+    private long LocID;
 
     private String locationName‭;
 
@@ -34,7 +34,7 @@ public class Location implements Serializable {
     }
 
     public static class Builder‭{
-        private Long LocID;
+        private long LocID;
         private String locationName‭;
         private Beekeeper beekeepers;
 
@@ -63,7 +63,7 @@ public class Location implements Serializable {
             return new Location (this);
         }
     }
-    public Long getId() {
+    public long getLocID() {
         return LocID;
     }
     public String getLocationName‭‭() {

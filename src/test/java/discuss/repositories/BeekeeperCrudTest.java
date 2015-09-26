@@ -33,9 +33,9 @@ public class BeekeeperCrudTest extends AbstractTestNGSpringContextTests{
         Beekeeper beekeepers = BeekeeperFactory.create("karl", "otto", "karl1256@yahoo.com");
 
         repository.save(beekeepers);
-        id=beekeepers.getId();
-        Assert.assertNotNull(beekeepers.getId());
-        System.out.println(beekeepers.getId());
+        id=beekeepers.getBeeId();
+        Assert.assertNotNull(beekeepers.getBeeId());
+        System.out.println(beekeepers.getBeeId());
     }
 
 

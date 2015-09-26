@@ -43,7 +43,12 @@ public class HiveServiceTest extends AbstractTestNGSpringContextTests {
                 .create("Active", sublocations);
 
         service.saveHive(hives.getHiveState(),
-                hives.getSubLocation());
+                sublocations.getSubLocationName(),
+                locations.getLocationName‭‭(),
+                beekeepers.getFirstName(),
+                beekeepers.getLastName(),
+                beekeepers.getEmail());
+
 
 
         id = hives.getId();

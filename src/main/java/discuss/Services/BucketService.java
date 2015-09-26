@@ -8,8 +8,15 @@ import discuss.domain.Harvest;
  */
 public interface BucketService {
     String saveBucket(
-                       double weight,
-                       Harvest harvests
+                       double bucWeight,
+                       String harvestDate,
+                       double harWeight,
+                       String subLocationName,
+                       String locationName,
+                       String bFirstname,
+                       String bLastname,
+                       String bEmail
+
     );
 
     Bucket getBucket(Long id);

@@ -11,8 +11,18 @@ public interface SaleService {
     String saveSales(
             String salesDate,
             double price,
-            Bucket buckets,
-            Customer customers
+            double bucWeight,
+            String harvestDate,
+            double harWeight,
+            String subLocationName,
+            String locationName,
+            String bFirstname,
+            String bLastname,
+            String bEmail,
+            String cFirstname,
+            String cLastname,
+            String cEmail
+
     );
 
     Sales getSales(Long id);

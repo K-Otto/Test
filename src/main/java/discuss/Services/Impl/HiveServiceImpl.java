@@ -1,8 +1,13 @@
 package discuss.Services.Impl;
 
 import discuss.Services.HiveService;
+import discuss.conf.factories.BeekeeperFactory;
 import discuss.conf.factories.HiveFactory;
+import discuss.conf.factories.LocationFactory;
+import discuss.conf.factories.SubLocationFactory;
+import discuss.domain.Beekeeper;
 import discuss.domain.Hive;
+import discuss.domain.Location;
 import discuss.domain.SubLocation;
 import discuss.respository.HiveRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +24,20 @@ public class HiveServiceImpl implements HiveService{
 
     @Override
     public String saveHive(String hiveState,
-                               SubLocation sublocations) {
+                           String subLocationName,
+                           String locationName,
+                           String firstname,
+                           String lastname,
+                           String email) {
+        Beekeeper beekeepers = BeekeeperFactory
+                .create(firstname, lastname, email);
+
+        Location locations = LocationFactory
+                .create(locationName, beekeepers);
+        SubLocation subLocations = SubLocationFactory
+                .create(subLocationName, locations);
         Hive hives = HiveFactory
-                .create(hiveState, sublocations);
+                .create(hiveState, subLocations);
 
         return repository.save(hives).toString();
 

@@ -1,6 +1,7 @@
 package discuss.Services.Impl;
 
 import discuss.Services.LocationService;
+import discuss.conf.factories.BeekeeperFactory;
 import discuss.conf.factories.LocationFactory;
 import discuss.domain.Beekeeper;
 import discuss.domain.Location;
@@ -19,16 +20,21 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public String saveLocation(String locationName,
-                                Beekeeper beekeeper) {
+                                String firstname,
+                                String lastname,
+                                String email) {
+        Beekeeper beekeepers = BeekeeperFactory
+                .create(firstname, lastname, email);
+
         Location locations = LocationFactory
-                .create(locationName, beekeeper);
+                .create(locationName, beekeepers);
 
         return repository.save(locations).toString();
 
     }
 
     @Override
-    public Location getLocation (Long id) {
+    public Location getLocation (long id) {
 
         return repository.findOne(id);
     }

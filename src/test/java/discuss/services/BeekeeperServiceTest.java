@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 @WebAppConfiguration
 public class BeekeeperServiceTest  extends AbstractTestNGSpringContextTests {
 
-    private Long id;
+    private long id;
     private Beekeeper beekeeperGlobal;
 
     @Autowired
@@ -28,20 +28,13 @@ public class BeekeeperServiceTest  extends AbstractTestNGSpringContextTests {
     public void create() throws Exception {
         Beekeeper beekeepers = BeekeeperFactory
                 .create("Karl", "Otto", "Karl@gmail.com");
-        Location locations = LocationFactory
-                .create("Darling", beekeepers);
-        SubLocation sublocations = SubLocationFactory
-                .create("Waterhole", locations);
-        Hive hives = HiveFactory
-                .create("Active", sublocations);
-        Super supers = SuperFactory
-                .create("Active", hives);
+
         service.saveBeekeeper(beekeepers.getFirstName(),
                 beekeepers.getLastName(),
                 beekeepers.getEmail());
 
-        
-        id = beekeepers.getId();
+
+        id = beekeepers.getBeeId();
         beekeeperGlobal = beekeepers;
         Assert.assertNotNull(beekeepers);
     }
@@ -50,10 +43,14 @@ public class BeekeeperServiceTest  extends AbstractTestNGSpringContextTests {
     public void read() throws Exception {
         // Get subject
         String idtest = id + "";
-        Long longId = Long.parseLong(idtest);
-        Beekeeper beekeepers = service.getBeekeeper(longId);
-        beekeeperGlobal = service.getBeekeeper(longId);
+
+        long longId = Long.parseLong(idtest);
+        Beekeeper beekeepers = service.getBeekeeper(1);
+        id = beekeepers.getBeeId();
+        beekeeperGlobal = service.getBeekeeper(id);
+
         Assert.assertNotNull(beekeeperGlobal);
+
     }
 
 }

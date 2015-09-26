@@ -1,11 +1,8 @@
 package discuss.Services.Impl;
 
 import discuss.Services.SaleService;
-import discuss.conf.factories.SalesFactory;
-import discuss.domain.Bucket;
-import discuss.domain.Customer;
-import discuss.domain.Harvest;
-import discuss.domain.Sales;
+import discuss.conf.factories.*;
+import discuss.domain.*;
 import discuss.respository.SalesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,9 +18,31 @@ public class SaleServiceImpl implements SaleService {
 
     @Override
     public String saveSales(String salesDate,
-            double price,
-            Bucket buckets,
-            Customer customers) {
+                            double price,
+                            double bucWeight,
+                            String harvestDate,
+                            double harWeight,
+                            String subLocationName,
+                            String locationName,
+                            String bFirstname,
+                            String bLastname,
+                            String bEmail,
+                            String cFirstname,
+                            String cLastname,
+                            String cEmail) {
+        Beekeeper beekeepers = BeekeeperFactory
+                .create(bFirstname, bLastname, bEmail);
+
+        Location locations = LocationFactory
+                .create(locationName, beekeepers);
+        SubLocation subLocations = SubLocationFactory
+                .create(subLocationName, locations);
+        Harvest harvests =  HarvestFactory
+                .create(harvestDate, harWeight, subLocations);
+        Bucket buckets =  BucketFactory
+                .create(bucWeight, harvests);
+        Customer customers = CustomerFactory
+                .create(cFirstname, cLastname, cEmail);
         Sales sales = SalesFactory
                 .create(salesDate,price, buckets,customers);
 

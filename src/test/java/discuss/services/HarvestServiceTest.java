@@ -43,7 +43,12 @@ public class HarvestServiceTest extends AbstractTestNGSpringContextTests {
 
         service.saveHarvest(harvests.getHarvestDate(),
                 harvests.getWeight(),
-                harvests.getSubLocation());
+                sublocations.getSubLocationName(),
+                locations.getLocationName‭‭(),
+                beekeepers.getFirstName(),
+                beekeepers.getLastName(),
+                beekeepers.getEmail());
+
 
 
         id = harvests.getId();

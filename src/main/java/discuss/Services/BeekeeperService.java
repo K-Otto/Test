@@ -11,5 +11,5 @@ public interface BeekeeperService {
                         String Email
     );
 
-    Beekeeper getBeekeeper(Long id);
+    Beekeeper getBeekeeper(long id);
 }

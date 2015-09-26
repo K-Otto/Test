@@ -38,7 +38,12 @@ public class SuperServiceTest extends AbstractTestNGSpringContextTests{
         Super supers = SuperFactory
                 .create("Active", hives);
         service.saveSuper(supers.getSuperState(),
-                supers.getHives());
+                hives.getHiveState(),
+                sublocations.getSubLocationName(),
+                locations.getLocationName‭‭(),
+                beekeepers.getFirstName(),
+                beekeepers.getLastName(),
+                beekeepers.getEmail());
 
 
         id = supers.getId();

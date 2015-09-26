@@ -1,7 +1,10 @@
 package discuss.Services.Impl;
 
 import discuss.Services.SubLocationService;
+import discuss.conf.factories.BeekeeperFactory;
+import discuss.conf.factories.LocationFactory;
 import discuss.conf.factories.SubLocationFactory;
+import discuss.domain.Beekeeper;
 import discuss.domain.Location;
 import discuss.domain.SubLocation;
 import discuss.respository.SubLocationRepository;
@@ -19,7 +22,15 @@ public class SubLocationServiceImpl implements SubLocationService{
 
     @Override
     public String saveSubLocation(String subLocationName,
-                               Location locations) {
+                                  String locationName,
+                                  String firstname,
+                                  String lastname,
+                                  String email) {
+        Beekeeper beekeepers = BeekeeperFactory
+                .create(firstname, lastname, email);
+
+        Location locations = LocationFactory
+                .create(locationName, beekeepers);
         SubLocation subLocations = SubLocationFactory
                 .create(subLocationName, locations);
 
