@@ -28,7 +28,7 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public Location geLocation (Long id) {
+    public Location getLocation (Long id) {
 
         return repository.findOne(id);
     }

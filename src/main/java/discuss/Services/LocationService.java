@@ -11,5 +11,5 @@ public interface LocationService {
                          Beekeeper beekeeper
     );
 
-    Location geLocation(Long id);
+    Location getLocation(Long id);
 }
